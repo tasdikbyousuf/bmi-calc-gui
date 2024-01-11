@@ -11,83 +11,44 @@ def reset():
 def calculate_bmi():
     weight_in_kilograms = int(weight_tf.get())
     height_in_meters = int(height_tf.get()) / 100
-    bmi = weight_in_kilograms / (height_in_meters ** 2)
-    bmi = round(bmi, 2)
-    bmi_index(bmi)
-
-
-def bmi_index(bmi):
-    if bmi < 18.5:
-        messagebox.showinfo('Underweight', f'BMI = {bmi}\n Category: Underweight')
-    elif (bmi > 18.5) and (bmi < 24.9):
-        messagebox.showinfo('Normal', f'BMI = {bmi}.\n Category: Normal')
-    elif (bmi > 24.9) and (bmi < 29.9):
-        messagebox.showinfo('Overweight', f'BMI = {bmi}.\n Category: Overweight')
-    elif (bmi > 29.9):
-        messagebox.showinfo('Obese', f'BMI = {bmi}.\n Category: Obese')
-    elif (bmi > 34.9):
-        messagebox.showinfo('Morbidly Obese', f'BMI = {bmi}.\n Category: Morbidly Obese')
+    if weight_in_kilograms == 0 or height_in_meters == 0:
+        messagebox.showerror('Invalid',"Please enter valid information")
     else:
-        messagebox.showerror('Invalid!', 'Enter correct data')
+        bmi = weight_in_kilograms / (height_in_meters ** 2)
+        bmi = round(bmi, 2)
+        if bmi < 18.5:
+            messagebox.showinfo('Underweight', f'BMI = {bmi}\n Category: Underweight')
+        elif (bmi > 18.5) and (bmi < 24.9):
+            messagebox.showinfo('Normal', f'BMI = {bmi}.\n Category: Normal')
+        elif (bmi > 24.9) and (bmi < 29.9):
+            messagebox.showinfo('Overweight', f'BMI = {bmi}.\n Category: Overweight')
+        elif (bmi > 29.9):
+            messagebox.showinfo('Obese', f'BMI = {bmi}.\n Category: Obese')
+        elif (bmi > 34.9):
+            messagebox.showinfo('Morbidly Obese', f'BMI = {bmi}.\n Category: Morbidly Obese')
+        else:
+            messagebox.showerror('Invalid!', 'Enter correct data')
 
 
 ws = Tk()
 ws.title('BMI Calculator')
-ws.geometry('1200x900')
+ws.geometry('400x200')
 ws.config(bg='#020803')
 
 var = IntVar()
 
 frame = Frame(
     ws,
-    padx=10,
-    pady=10
+    padx=80,
+    pady=40
 )
-frame.pack(expand=True)
-
-age_lb = Label(
-    frame,
-    text="Enter Age (2 - 120)"
-)
-age_lb.grid(row=1, column=1)
-
-age_tf = Entry(
-    frame,
-)
-age_tf.grid(row=1, column=2, pady=5)
-
-gen_lb = Label(
-    frame,
-    text='Select Gender'
-)
-gen_lb.grid(row=2, column=1)
-
-frame2 = Frame(
-    frame
-)
-frame2.grid(row=2, column=2, pady=5)
-
-male_rb = Radiobutton(
-    frame2,
-    text='Male',
-    variable=var,
-    value=1
-)
-male_rb.pack(side=LEFT)
-
-female_rb = Radiobutton(
-    frame2,
-    text='Female',
-    variable=var,
-    value=2
-)
-female_rb.pack(side=RIGHT)
-
+frame.pack(fill=BOTH, expand=True)
 height_lb = Label(
     frame,
     text="Enter Height (cm)  "
 )
 height_lb.grid(row=3, column=1)
+
 
 weight_lb = Label(
     frame,
