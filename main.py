@@ -3,7 +3,6 @@ from tkinter import messagebox
 
 
 def reset():
-    age_tf.delete(0, 'end')
     height_tf.delete(0, 'end')
     weight_tf.delete(0, 'end')
 
